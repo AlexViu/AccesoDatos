@@ -20,10 +20,12 @@ public class TestManejoPersonas {
         PersonaDAO personaDao = new PersonaDAO();
         List<Persona> personas = personaDao.seleccionar();
         
-        Persona personaNueva = new Persona("Carlos", "Perez", 54,  "carlos@gmail.com");
+        Persona personaNueva = new Persona("Antonio", "Fernandez","antonio@gmail.com", 30);
         personaDao.insertar(personaNueva);
         personas.forEach(persona -> {
             System.out.println("persona = " + persona);
         });
+       
+       
     }
 }

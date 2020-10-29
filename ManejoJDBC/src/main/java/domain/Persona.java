@@ -29,11 +29,11 @@ public class Persona {
         this.idPersona = idpersona;
     }
     
-    public Persona(String Nombre, String Apellidos, int Edad, String Email) {
+    public Persona(String Nombre, String Apellidos,String Email, int Edad) {
         this.nombre = Nombre;
         this.apellidos = Apellidos;
-        this.edad = Edad;
         this.email = Email;
+        this.edad = Edad;
     }
     
     public Persona(int IdPersona, String Nombre, String Apellidos, int Edad, String Email) {
