@@ -28,24 +28,9 @@ public class TestManejoPersonas {
             if (conexion.getAutoCommit()) {
                 conexion.setAutoCommit(false);
             }
+            Persona nueva_persona =new Persona("Antonio11111111111111111111111111111111111111111111", "Pérez","carlitos@gmail.com",35);
+       
             
-            PersonaDAO personaDao = new PersonaDAO(conexion);
-            
-            Persona cambioPersona = new Persona();
-            cambioPersona.setIdPersona(2);
-            cambioPersona.setNombre("Karla Ivonne");
-            cambioPersona.setApellidos("Gomez");
-            cambioPersona.setEmail("kgomez@mail.com");
-            //cambioPersona.setTelefono("7713445678");
-            personaDao.update(cambioPersona);
-            Persona nuevaPersona = new Persona();
-            nuevaPersona.setNombre("Carlos");
-            nuevaPersona.setApellidos("Ramirez");
-            personaDao.insertar(nuevaPersona);
-            
-            conexion.commit();
-            System.out.println("Se ha hecho commit de la transaccion");
-   
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
             System.out.println("Entramos al rollback");
