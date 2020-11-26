@@ -36,14 +36,14 @@ public class Cliente {
         this.Id = id;
     }
     
-    public Cliente(String nombre, String apellidos, String dni, String fecha_nac, String email) {
+    public Cliente(String nombre, String apellidos, String dni, String fecha_nac, String email, int puntos, int saldo) {
         this.Nombre = nombre;
         this.Apellidos = apellidos;
         this.Dni = dni;
         this.Fecha_nac = fecha_nac;
         this.Email = email;
-        this.Puntos = 0;
-        this.Saldo = 0;
+        this.Puntos = puntos;
+        this.Saldo = saldo;
     }
     
     public Cliente(int id, String nombre, String apellidos, String dni, String fecha_nac, String email, int puntos, int saldo) {

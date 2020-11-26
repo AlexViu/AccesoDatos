@@ -8,35 +8,35 @@ package datos;
 import static datos.Conexion.*;
 import java.util.*;
 import java.sql.*;
-import domain.Cliente;
+import domain.Compra;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author aledom
+ * @author alex_
  */
-public class ClienteDAO {
-    private static final String SQL_SELECT="SELECT id, nombre, apellidos, dni, fecha_nac, email, puntos, saldo FROM cliente";
-    private static final String SQL_INSERT="INSERT INTO cliente(nombre, apellidos, dni, fecha_nac, email, puntos, saldo) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_DELETE = "DELETE FROM cliente where id = ?";
-    private static final String SQL_UPDATE = "UPDATE cliente SET nombre = ?, apellidos = ?, dni = ?, fecha_nac = ?, email = ?, puntos = ?, saldo = ? WHERE id = ?";
+public class CompraDAO {
+    private static final String SQL_SELECT="SELECT id, id_cliente, id_producto, importe, fecha, puntos FROM compra";
+    private static final String SQL_INSERT="INSERT INTO compra(id_cliente, id_producto, importe, fecha, puntos) VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_DELETE = "DELETE FROM compra where id = ?";
+    private static final String SQL_UPDATE = "UPDATE cliente SET id_cliente = ?, id_producto = ?, importe = ?, fecha = ?, puntos = ? WHERE id = ?";
     private Connection conexionTransaccional;
     
-    public ClienteDAO() {
+    public CompraDAO() {
     
     }
     
-    public ClienteDAO(Connection conexionTransaccional) {
+    public CompraDAO(Connection conexionTransaccional) {
               this.conexionTransaccional = conexionTransaccional;
     }
     
-    public List<Cliente> seleccionar() throws SQLException {
+    public List<Compra> seleccionar() throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Cliente cliente = null;
-        List<Cliente> clientes = new ArrayList<>();
+        Compra compra = null;
+        List<Compra> compras = new ArrayList<>();
         
          try {
             conn = this.conexionTransaccional != null ? this.conexionTransaccional : Conexion.getConnection();
@@ -45,16 +45,13 @@ public class ClienteDAO {
             rs=stmt.executeQuery();
             while (rs.next()){
                 int id = rs.getInt("id");
-                String nombre = rs.getString("nombre");
-                String apellidos = rs.getString("apellidos");
-                String dni = rs.getString("dni");
-                String fecha_nac = rs.getString("fecha_nac");
-                String email = rs.getString("email");
+                int id_cliente = rs.getInt("id_cliente");
+                int id_producto = rs.getInt("id_producto");
+                int importe = rs.getInt("importe");
+                String fecha = rs.getString("fecha");
                 int puntos = rs.getInt("puntos");
-                int saldo = rs.getInt("saldo");
-                
-                cliente = new Cliente(id, nombre, apellidos, dni, fecha_nac, email, puntos, saldo);
-                clientes.add(cliente);
+                compra = new Compra(id, id_cliente, id_producto, importe, fecha, puntos);
+                compras.add(compra);
             }
             
         } catch (SQLException ex) {
@@ -71,11 +68,11 @@ public class ClienteDAO {
             //Conexion.close(stmt);
         }
         
-        return clientes;
+        return compras;
     }
     
     
-    public int insertar (Cliente cliente) {
+    public int insertar (Compra compra) {
         Connection conn = null;
         PreparedStatement stmt = null;
         
@@ -83,13 +80,11 @@ public class ClienteDAO {
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, cliente.getNombre());
-            stmt.setString(2, cliente.getApellidos());
-            stmt.setString(3, cliente.getDni());
-            stmt.setString(4, cliente.getFecha_nac());
-            stmt.setString(5, cliente.getEmail());
-            stmt.setInt(6, cliente.getPuntos());
-            stmt.setInt(7, cliente.getSaldo());
+            stmt.setInt(1, compra.getId_cliente());
+            stmt.setInt(2, compra.getId_producto());
+            stmt.setInt(3, compra.getImporte());
+            stmt.setString(4, compra.getFecha());
+            stmt.setInt(5, compra.getPuntos());
             registros = stmt.executeUpdate();
 
         } catch (SQLException ex) {
@@ -107,7 +102,7 @@ public class ClienteDAO {
         return registros;
     }
     
-    public int delete(Cliente cliente) {
+    public int delete(Compra compra) {
 
         Connection con = null;
         PreparedStatement stmt = null;
@@ -117,7 +112,7 @@ public class ClienteDAO {
 
             con = Conexion.getConnection();
             stmt = con.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, cliente.getId());
+            stmt.setInt(1, compra.getId());
             registros = stmt.executeUpdate();
 
         } catch (SQLException ex) {
@@ -136,7 +131,7 @@ public class ClienteDAO {
         return registros;
     }
     
-     public int update(Cliente cliente) {
+     public int update(Compra compra) {
         
         Connection con = null;
         PreparedStatement stmt = null;
@@ -146,14 +141,12 @@ public class ClienteDAO {
             
             con = Conexion.getConnection();
             stmt = con.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, cliente.getNombre());
-            stmt.setString(2, cliente.getApellidos());
-            stmt.setString(3, cliente.getDni());
-            stmt.setString(4, cliente.getFecha_nac());
-            stmt.setString(5, cliente.getEmail());
-            stmt.setInt(6, cliente.getPuntos());
-            stmt.setInt(7, cliente.getSaldo());
-            stmt.setInt(8, cliente.getId());
+            stmt.setInt(1, compra.getId_cliente());
+            stmt.setInt(2, compra.getId_producto());
+            stmt.setInt(3, compra.getImporte());
+            stmt.setString(4, compra.getFecha());
+            stmt.setInt(5, compra.getPuntos());
+            stmt.setInt(6, compra.getId());
             registros = stmt.executeUpdate();
             
         } catch (SQLException ex) {
@@ -162,5 +155,4 @@ public class ClienteDAO {
         }
       return registros;
     }
-
 }
