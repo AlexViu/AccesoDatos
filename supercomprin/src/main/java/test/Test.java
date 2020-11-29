@@ -70,6 +70,9 @@ public class Test {
                     case 10:
                         compra_puntos();
                         break;
+                    case 11:
+                        devolver_compra();
+                        break;
                 }
                 menu();
                 opcion = sc.nextInt();
@@ -90,6 +93,7 @@ public class Test {
         System.out.println("8- Hacer compra(EUROS)");
         System.out.println("9- Recargar saldo");
         System.out.println("10- Hacer compra(PUNTOS)");
+        System.out.println("11- Devolver compra");
         System.out.println("0- Salir");
         System.out.println("-------------------------------");   
         System.out.println("Introduce una opcion: ");
@@ -435,5 +439,79 @@ public class Test {
         } else {
             System.out.println("No tienes suficientes puntos para comprar este producto");
         }
+    }
+    
+    public static void devolver_compra() throws SQLException {
+        Scanner sc = new Scanner(System.in);
+        
+        ClienteDAO clienteDao = new ClienteDAO();
+        ProductoDAO productoDao = new ProductoDAO();
+        CompraDAO compraDao = new CompraDAO();
+        List<Cliente> listaClientes = clienteDao.seleccionar();
+        List<Producto> listaProductos = productoDao.seleccionar();
+       
+        boolean verificar_dni = false;
+        boolean verificar_producto = false;
+        String dni = "";
+        String dni_escan = "";
+        int id_producto = 0;
+        int id_producto_scan = 0;
+        int id_cliente = 0;
+        int puntos = 0;
+        int importe = 0;
+        int saldo = 0;
+        int puntos_cliente = 0;
+        
+        SimpleDateFormat fecha = new SimpleDateFormat("yyyy/MM/dd");
+        String fechaComoCadena = fecha.format(new Date());
+        
+        while (verificar_dni == false) {
+
+            System.out.print("Introduzca el DNI: ");
+            dni_escan = sc.nextLine();
+            for (Cliente cliente : listaClientes) {
+
+                dni = cliente.getDni();
+
+                if (dni.equals(dni_escan)) {
+                    verificar_dni = true;
+                    id_cliente = cliente.getId();
+                    saldo = cliente.getSaldo();
+                    puntos_cliente = cliente.getPuntos();
+                }
+            }
+            if (verificar_dni == false) {
+                System.out.println("El DNI " + dni_escan + " no existe");
+            } 
+        }
+        
+        while (verificar_producto == false) {
+
+            System.out.print("Introduzca el ID del producto: ");
+            id_producto_scan = sc.nextInt();
+            sc.nextLine();
+            for (Producto producto : listaProductos) {
+
+                id_producto = producto.getId();
+
+                if (id_producto == id_producto_scan) {
+                    verificar_producto = true;
+                    puntos = producto.getPuntos();
+                    importe = producto.getPrecio();
+                }
+            }
+            if (verificar_producto == false) {
+                System.out.println("El producto con id " + id_producto_scan + " no existe");
+            } 
+        }
+        
+        saldo = saldo + importe;
+        puntos_cliente = puntos_cliente - puntos;
+        //Hace la compra
+        Compra compraNueva = new Compra(id_cliente, id_producto_scan, importe, fechaComoCadena, puntos);
+        compraDao.insertar(compraNueva);
+        //modifica el cliente
+        Cliente clienteUpdate = new Cliente(id_cliente, puntos_cliente, saldo);
+        clienteDao.update_compra(clienteUpdate);
     }
 }
