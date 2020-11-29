@@ -57,6 +57,26 @@ public class Cliente {
         this.Saldo = saldo;
     }
 
+    public Cliente(int id, int puntos, int saldo) {
+        this.Id = id;
+        this.Puntos = puntos;
+        this.Saldo = saldo;
+    }
+    
+     public Cliente(int id, int saldo) {
+        this.Id = id;
+        this.Saldo = saldo;
+    }
+    
+    public Cliente(int id, String nombre, String apellidos, String dni, String fecha_nac, String email) {
+        this.Id = id;
+        this.Nombre = nombre;
+        this.Apellidos = apellidos;
+        this.Dni = dni;
+        this.Fecha_nac = fecha_nac;
+        this.Email = email;
+    }
+    
     public int getId() {
         return Id;
     }
