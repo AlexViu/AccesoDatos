@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import mx.com.gm.SGA.Contactos;
+import mx.com.gm.SGA.domain.Contacto;
 
 
 /**
@@ -18,22 +18,24 @@ import mx.com.gm.SGA.Contactos;
  */
 public class GestionContactos {
     public static void altaContacto(String nombre, String email, String telefono){
-        EntityManagerFactory emf=Persistence.createEntityManagerFactory("PersonaPU");
+        EntityManagerFactory emf=Persistence.createEntityManagerFactory("ContactoPU");
         EntityManager em=emf.createEntityManager();
         EntityTransaction tx=em.getTransaction();
         
         //Empezamos transaccion
         tx.begin();
         
-        Contactos contacto=new Contactos(nombre, email, telefono);
+        Contacto contacto=new Contacto(nombre, email, telefono);
         
         em.persist(contacto);
         
         tx.commit();
+        
+        em.close();
     }
     
     public static void eliminarContacto(int id) {
-        EntityManagerFactory emf=Persistence.createEntityManagerFactory("PersonaPU");
+        EntityManagerFactory emf=Persistence.createEntityManagerFactory("ContactoPU");
         EntityManager em=emf.createEntityManager();
         EntityTransaction tx=em.getTransaction();
         

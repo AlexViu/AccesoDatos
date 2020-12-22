@@ -3,29 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.com.gm.SGA;
+package mx.com.gm.SGA.domain;
 
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author aledom
  */
-public class Contactos implements Serializable {
+@Entity
+@Table(name="contactos")
+public class Contacto implements Serializable {
     private static final long SerialVersionUID=1L;
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="idContacto")
     private int idcontacto;
     private String nombre;
     private String email;
     private String telefono;
 
-    public Contactos(String nombre, String email, String telefono) {
+    public Contacto(String nombre, String email, String telefono) {
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
