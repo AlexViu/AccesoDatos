@@ -36,7 +36,9 @@ public class Controller extends HttpServlet {
 			case "toMenu":
 				url="menu.html";
 				break;
-			
+			case "doLogin":
+				url="LoginAction";
+				break;
 			
 		}
 		request.getRequestDispatcher(url).forward(request, response);

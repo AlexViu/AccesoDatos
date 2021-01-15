@@ -24,10 +24,6 @@ public class Contacto implements Serializable{
     public Contacto() {
     }
 
-   /* public Contacto(String nombre, String email, int telefono) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
-
     public int getIdContacto() {
         return idContacto;
     }
