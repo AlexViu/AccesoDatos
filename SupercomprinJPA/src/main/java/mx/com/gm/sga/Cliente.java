@@ -41,12 +41,12 @@ public class Cliente implements Serializable{
     public Cliente() {
     }
 
-    public int getIdCliente() {
+    public int getId() {
         return id;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.id = idCliente;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {

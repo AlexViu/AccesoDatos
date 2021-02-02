@@ -21,9 +21,9 @@ public class EliminarAction extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idContacto=Integer.parseInt(request.getParameter("idContacto"));
+		int idCliente=Integer.parseInt(request.getParameter("id"));
 		GestionContactos gcontactos=new GestionContactos();
-		gcontactos.eliminarContacto(idContacto);
+		gcontactos.eliminarContacto(idCliente);
 		request.getRequestDispatcher("RecuperarAction").forward(request, response);
 	}
 

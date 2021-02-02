@@ -6,44 +6,36 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import modelo.GestionClientes;
+import mx.com.gm.sga.Cliente;
+
+
 /**
  *
- * @author alex_
+ * @author aledom
  */
-@WebServlet("/Controller")
-public class Controller extends HttpServlet {
+@WebServlet("/RecuperarAction")
+public class RecuperarAction extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    
-    /**
+
+	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String op=request.getParameter("op");
-		String url="";
-		switch(op){
-			case "doAlta":
-				url="nuevoCliente";
-				break;
-			case "doEliminar":
-				url="EliminarAction";
-				break;
-			case "doRecuperar":
-				url="RecuperarAction";
-				break;
-                        case "toNuevo":
-				url="nuevoCliente.html";
-				break;
-			case "toMenu":
-				url="index.html";
-				break;
-			
-		}
-		request.getRequestDispatcher(url).forward(request, response);
+		GestionClientes gclientes=new GestionClientes();
+		List<Cliente> cliente=gclientes.recuperarClientes();
+		//guardamos contactos en un atributo de petici�n
+		request.setAttribute("cliente", cliente);
+		//trasnferencia de la petici�n
+		request.getRequestDispatcher("clientes.jsp").forward(request, response);
 	}
 }
