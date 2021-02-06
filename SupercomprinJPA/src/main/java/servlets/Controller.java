@@ -28,19 +28,40 @@ public class Controller extends HttpServlet {
 		String url="";
 		switch(op){
 			case "doAlta":
-				url="nuevoCliente";
+				url="AltaAction";
+				break;
+                        case "doNuevoProducto":
+				url="NuevoProductoAction";
+				break;
+                        case "doNuevoCompra":
+				url="NuevoCompraAction";
 				break;
 			case "doEliminar":
 				url="EliminarAction";
 				break;
+                        case "doEliminarProducto":
+				url="EliminarProductoAction";
+				break;
 			case "doRecuperar":
 				url="RecuperarAction";
+				break;
+                        case "doRecuperarp":
+				url="RecuperarProductosAction";
+				break;
+                        case "doRecuperarCompras":
+				url="RecuperarComprasAction";
 				break;
                         case "toNuevo":
 				url="nuevoCliente.html";
 				break;
 			case "toMenu":
 				url="index.html";
+				break;
+                        case "toNuevop":
+				url="nuevoProducto.html";
+				break;
+                        case "toNuevoCompra":
+				url="nuevoCompra.html";
 				break;
 			
 		}

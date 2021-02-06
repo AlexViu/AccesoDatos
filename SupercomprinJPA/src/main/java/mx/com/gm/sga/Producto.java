@@ -19,7 +19,7 @@ public class Producto implements Serializable {
     private static final long SerialVersionUID=1L;
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int idProducto;
+    private int id;
     private String nombre;
     private int precio;
     private int puntos;
@@ -33,13 +33,15 @@ public class Producto implements Serializable {
     public Producto() {
     }
 
-    public int getIdProducto() {
-        return idProducto;
+    public int getId() {
+        return id;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+    public void setId(int id) {
+        this.id = id;
     }
+
+    
 
     public String getNombre() {
         return nombre;
@@ -67,7 +69,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", precio=" + precio + ", puntos=" + puntos + '}';
+        return "Producto{" + "id=" + id+ ", nombre=" + nombre + ", precio=" + precio + ", puntos=" + puntos + '}';
     }
     
     

@@ -13,28 +13,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.GestionClientes;
+import modelo.GestionProductos;
 /**
  *
  * @author alex_
  */
-@WebServlet("/AltaAction")
-public class AltaAction extends HttpServlet{
+@WebServlet("/EliminarProductoAction")
+public class EliminarProductoAction extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nombre=request.getParameter("nombre");
-		String apellidos=request.getParameter("apellidos");
-		String dni=request.getParameter("dni");
-                String fecha_nac=request.getParameter("fecha_nac");
-                String email=request.getParameter("email");
-		//creamos un objeto de la capa de lgica de negocio
-		//y llamamos al método encargado de hacer el alta
-		GestionClientes gclientes=new GestionClientes();
-		gclientes.altaCliente(nombre, apellidos, dni, fecha_nac, email);
-		request.getRequestDispatcher("index.html").forward(request, response);
+		int id=Integer.parseInt(request.getParameter("id"));
+		GestionProductos gproductos=new GestionProductos();
+		gproductos.eliminarProducto(id);
+		request.getRequestDispatcher("RecuperarProductosAction").forward(request, response);
 	}
 }

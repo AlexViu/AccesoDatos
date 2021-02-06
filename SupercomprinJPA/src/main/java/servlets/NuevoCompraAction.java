@@ -13,28 +13,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.GestionClientes;
+import modelo.GestionCompras;
 /**
  *
  * @author alex_
  */
-@WebServlet("/AltaAction")
-public class AltaAction extends HttpServlet{
+
+@WebServlet("/NuevoCompraAction")
+public class NuevoCompraAction extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nombre=request.getParameter("nombre");
-		String apellidos=request.getParameter("apellidos");
-		String dni=request.getParameter("dni");
-                String fecha_nac=request.getParameter("fecha_nac");
-                String email=request.getParameter("email");
+		int id_cliente=Integer.parseInt(request.getParameter("id_cliente"));
+		int id_producto=Integer.parseInt(request.getParameter("id_producto"));
+                int importe=Integer.parseInt(request.getParameter("importe"));
+                String fecha=request.getParameter("fecha");
+                int puntos=Integer.parseInt(request.getParameter("puntos"));
 		//creamos un objeto de la capa de lgica de negocio
 		//y llamamos al método encargado de hacer el alta
-		GestionClientes gclientes=new GestionClientes();
-		gclientes.altaCliente(nombre, apellidos, dni, fecha_nac, email);
+		GestionCompras gcompras=new GestionCompras();
+		gcompras.nuevoCompra(id_cliente, id_producto, importe, fecha, puntos);
 		request.getRequestDispatcher("index.html").forward(request, response);
 	}
 }

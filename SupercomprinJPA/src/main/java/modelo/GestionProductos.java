@@ -12,53 +12,53 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-import mx.com.gm.sga.Cliente;
+import mx.com.gm.sga.Producto;
 
 /**
  *
  * @author alex_
  */
-public class GestionClientes {
+public class GestionProductos {
     private EntityManager getEntityManager(){
 			EntityManagerFactory factory=Persistence.createEntityManagerFactory("SupercomprinPU");
 			return factory.createEntityManager();
 		}   
 		
-		public void altaCliente(String nombre, String apellidos, String dni, String fecha_nac, String email){
-			Cliente c=new Cliente(nombre, apellidos, dni, fecha_nac, email, 0, 0);
+		public void nuevoProducto(String nombre, int precio, int puntos){
+			Producto p=new Producto(nombre, precio, puntos);
 			EntityManager em=getEntityManager();
 			//la operación la incluimos en una transacción
 			EntityTransaction tx=em.getTransaction();
 			tx.begin();
-			em.persist(c);
+			em.persist(p);
 			tx.commit();
 		}
-		public void altaCliente(Cliente c){
+		public void nuevoProducto(Producto p){
 			EntityManager em=getEntityManager();
 			//la operación la incluimos en una transacción
 			EntityTransaction tx=em.getTransaction();
 			tx.begin();
-			em.persist(c);
+			em.persist(p);
 			tx.commit();
 		}
 		
 		
-		public List<Cliente> recuperarClientes(){
+		public List<Producto> recuperarProductos(){
 			EntityManager em=getEntityManager();
-			/*Query qr=em.createQuery("Select c from cliente c");
-			return (List<Cliente>)qr.getResultList();*/
-			TypedQuery<Cliente> qr=em.createQuery("Select c from Cliente c",Cliente.class);
+			/*Query qr=em.createQuery("Select p from Producto p");
+			return (List<Producto>)qr.getResultList();*/
+			TypedQuery<Producto> qr=em.createQuery("Select p from Producto p",Producto.class);
 			return qr.getResultList();
 		}
 		
-		public void eliminarCliente(int id){
+		public void eliminarProducto(int id){
 			EntityManager em=getEntityManager();
-			Cliente c=em.find(Cliente.class, id);
+			Producto p=em.find(Producto.class, id);
 			EntityTransaction tx=em.getTransaction();
 			//si el contacto existe lo eliminamos 
 			tx.begin();
-			if(c!=null){
-				em.remove(c);
+			if(p!=null){
+				em.remove(p);
 			}
 			tx.commit();
 		}

@@ -18,12 +18,6 @@
  		}
  		
  	}
-        function comprobarTelf(){
-            if(isNaN(document.getElementById("telefono").value)){
-                alert("El teléfono debe ser numérico");
-                document.getElementById("edad").value="";
-            }
-        }
 </script>
 </head>
 <body>
@@ -34,7 +28,7 @@
 	<br/>
         DNI:<input id="dni" type="text" name="dni"/>
 	<br/>
-        Fecha nacimiento(YYYY-MM-DD):<input id="fecha_nac" type="text" name="fecha_nac"/>
+        Fecha nacimiento:<input id="fecha_nac" type="date" name="fecha_nac"/>
 	<br/>
 	Email:<input id="email" type="text" name="email"/>
 	<br/>
