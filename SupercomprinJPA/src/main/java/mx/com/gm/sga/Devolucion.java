@@ -14,29 +14,29 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table (name="compra")
-public class Compra implements Serializable {
+@Table (name="devolucion")
+public class Devolucion implements Serializable{
     private static final long SerialVersionUID=1L;
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    private int id_producto;
     private int id_cliente;
+    private int id_producto;
     private int importe;
     private String fecha;
     private int puntos;
 
-    public Compra(int id_producto, int id_cliente, int importe, String fecha, int puntos) {
-        this.id_producto = id_producto;
+    public Devolucion(int id_cliente, int id_producto, int importe, String fecha, int puntos) {
         this.id_cliente = id_cliente;
+        this.id_producto = id_producto;
         this.importe = importe;
         this.fecha = fecha;
         this.puntos = puntos;
     }
 
-    public Compra() {
+    public Devolucion() {
     }
-
+    
     public int getId() {
         return id;
     }
@@ -87,7 +87,6 @@ public class Compra implements Serializable {
 
     @Override
     public String toString() {
-        return "Compra{" + "id=" + id + ", id_producto=" + id_producto + ", id_cliente=" + id_cliente + ", importe=" + importe + ", fecha=" + fecha + ", puntos=" + puntos + '}';
+        return "Compra{" + "id=" + id + ", id_cliente=" + id_cliente + ", id_producto=" + id_producto + ", importe=" + importe + ", fecha=" + fecha + ", puntos=" + puntos + '}';
     }
-    
 }

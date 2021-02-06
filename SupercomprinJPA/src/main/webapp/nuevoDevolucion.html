@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Nuevo Devolucion</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript">
+ 	function comprobar(){ 	
+ 		if(document.getElementById("id_cliente").value==""||
+                        document.getElementById("id_producto").value==""||
+                        document.getElementById("importe").value=="" ||
+                        document.getElementById("fecha").value=="" ||
+                        document.getElementById("puntos").value==""){
+ 				alert("faltan datos");
+ 			return false;
+ 		}
+ 		else{
+ 			return true;
+ 		}
+ 		
+ 	}
+</script>
+</head>
+<body>
+<form action="Controller?op=doNuevoDevolucion" method="post" onsubmit="return comprobar();">
+	Id Cliente:<input id="id_cliente" type="text" name="id_cliente"/>
+	<br/>
+        Id Producto:<input id="id_producto" type="text" name="id_producto"/>
+	<br/>
+        Importe:<input id="importe" type="text" name="importe"/>
+	<br/>
+        Fecha:<input id="fecha" type="date" name="fecha"/>
+	<br/>
+        Puntos:<input id="puntos" type="text" name="puntos"/>
+	<br/>
+	<input type="submit" value="Guardar"/>
+</form>
+</body>
+</html>

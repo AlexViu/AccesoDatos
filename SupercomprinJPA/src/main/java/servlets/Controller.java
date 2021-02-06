@@ -36,6 +36,9 @@ public class Controller extends HttpServlet {
                         case "doNuevoCompra":
 				url="NuevoCompraAction";
 				break;
+                        case "doNuevoDevolucion":
+				url="NuevoDevolucionAction";
+				break;
 			case "doEliminar":
 				url="EliminarAction";
 				break;
@@ -51,6 +54,9 @@ public class Controller extends HttpServlet {
                         case "doRecuperarCompras":
 				url="RecuperarComprasAction";
 				break;
+                        case "doRecuperarDevoluciones":
+				url="RecuperarDevolucionesAction";
+				break;
                         case "toNuevo":
 				url="nuevoCliente.html";
 				break;
@@ -62,6 +68,9 @@ public class Controller extends HttpServlet {
 				break;
                         case "toNuevoCompra":
 				url="nuevoCompra.html";
+				break;
+                        case "toNuevoDevolucion":
+				url="nuevoDevolucion.html";
 				break;
 			
 		}
