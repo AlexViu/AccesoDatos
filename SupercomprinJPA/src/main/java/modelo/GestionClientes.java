@@ -62,4 +62,21 @@ public class GestionClientes {
 			}
 			tx.commit();
 		}
+                
+                public void updateCliente(int idu, String nombreu, String apellidosu, String dniu, String fecha_nacu, String emailu){
+			EntityManager em=getEntityManager();
+                        EntityTransaction tx=em.getTransaction();
+                        TypedQuery<Cliente> qr=em.createQuery("UPDATE Cliente SET nombre=?1, apellidos =?2, dni=?3, fecha_nac=?4, email=?5 WHERE id=?6",Cliente.class);
+                        
+                        qr.setParameter(1, nombreu);
+                        qr.setParameter(2, apellidosu);
+                        qr.setParameter(3, dniu);
+                        qr.setParameter(4, fecha_nacu);
+                        qr.setParameter(5, emailu);
+                        qr.setParameter(6, idu);
+                        
+                        tx.begin();
+                        qr.executeUpdate();
+                        tx.commit();
+		}
 }
