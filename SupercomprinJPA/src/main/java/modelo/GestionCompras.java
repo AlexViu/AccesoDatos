@@ -12,6 +12,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+
+import mx.com.gm.sga.Cliente;
 import mx.com.gm.sga.Compra;
 /**
  *
@@ -23,14 +25,15 @@ public class GestionCompras {
 			return factory.createEntityManager();
 		}   
 		
-		public void nuevoCompra(int id_cliente, int id_producto, int importe, String fecha, int puntos){
-			Compra p=new Compra(id_cliente, id_producto, importe, fecha, puntos);
+		public void nuevoCompra(Cliente cliente, int id_producto, int importe, String fecha, int puntos){
+			Compra p=new Compra( id_producto, cliente, importe, fecha, puntos);
 			EntityManager em=getEntityManager();
 			//la operación la incluimos en una transacción
 			EntityTransaction tx=em.getTransaction();
 			tx.begin();
 			em.persist(p);
 			tx.commit();
+                        
 		}
 		public void nuevoCompra(Compra c){
 			EntityManager em=getEntityManager();

@@ -60,6 +60,9 @@ public class Controller extends HttpServlet {
                         case "doUpdateCliente":
 				url="UpdateClienteAction";
 				break;
+                        case "doSaldoCliente":
+				url="AnyadirSaldoAction";
+				break;
                         case "toNuevo":
 				url="nuevoCliente.html";
 				break;
@@ -77,6 +80,9 @@ public class Controller extends HttpServlet {
 				break;
                         case "toUpdateCliente":
 				url="updateCliente.html";
+				break;
+                        case "toSaldoCliente":
+				url="anyadirSaldo.html";
 				break;
 			
 		}

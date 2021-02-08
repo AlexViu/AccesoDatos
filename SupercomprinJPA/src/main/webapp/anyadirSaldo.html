@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Nuevo Cliente</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript">
+ 	function comprobar(){ 	
+ 		if(document.getElementById("id").value==""||
+                        document.getElementById("saldo").value==""){
+ 				alert("faltan datos");
+ 			return false;
+ 		}
+ 		else{
+ 			return true;
+ 		}
+ 		
+ 	}
+</script>
+</head>
+<body>
+<form action="Controller?op=doSaldoCliente" method="post" onsubmit="return comprobar();">
+	Id:<input id="id" type="text" name="id"/>
+	<br/>
+        Saldo: <input id="saldo" type="text" name="saldo"/>
+	<br/>
+	<input type="submit" value="Guardar"/>
+</form>
+</body>
+</html>

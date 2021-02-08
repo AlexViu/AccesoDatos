@@ -7,6 +7,8 @@ package mx.com.gm.sga;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.sql.*;
+import java.util.List;
 
 /**
  *
@@ -28,6 +30,9 @@ public class Cliente implements Serializable{
     private int puntos;
     private int saldo;
 
+    @OneToMany(mappedBy="cliente")
+    private List<Compra> compras;
+    
     public Cliente(String nombre, String apellidos, String dni, String fecha_nac, String email, int puntos, int saldo) {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -38,6 +43,10 @@ public class Cliente implements Serializable{
         this.saldo = saldo;
     }
 
+    public Cliente(int id) {
+        this.id = id;
+    }
+    
     public Cliente() {
     }
 

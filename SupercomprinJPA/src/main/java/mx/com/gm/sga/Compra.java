@@ -21,14 +21,16 @@ public class Compra implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private int id_producto;
-    private int id_cliente;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
     private int importe;
     private String fecha;
     private int puntos;
 
-    public Compra(int id_producto, int id_cliente, int importe, String fecha, int puntos) {
+    public Compra(int id_producto, Cliente cliente, int importe, String fecha, int puntos) {
         this.id_producto = id_producto;
-        this.id_cliente = id_cliente;
+        this.cliente = cliente;
         this.importe = importe;
         this.fecha = fecha;
         this.puntos = puntos;
@@ -45,12 +47,12 @@ public class Compra implements Serializable {
         this.id = id;
     }
 
-    public int getId_cliente() {
-        return id_cliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setId_cliente(int id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public int getId_producto() {
@@ -87,7 +89,9 @@ public class Compra implements Serializable {
 
     @Override
     public String toString() {
-        return "Compra{" + "id=" + id + ", id_producto=" + id_producto + ", id_cliente=" + id_cliente + ", importe=" + importe + ", fecha=" + fecha + ", puntos=" + puntos + '}';
+        return "Compra{" + "id=" + id + ", id_producto=" + id_producto + ", cliente=" + cliente + ", importe=" + importe + ", fecha=" + fecha + ", puntos=" + puntos + '}';
     }
+
+    
     
 }

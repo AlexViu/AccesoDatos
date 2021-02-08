@@ -79,4 +79,18 @@ public class GestionClientes {
                         qr.executeUpdate();
                         tx.commit();
 		}
+                
+                public void saldoCliente(int id, int saldo){
+                    
+			EntityManager em=getEntityManager();
+                        EntityTransaction tx=em.getTransaction();
+                        TypedQuery<Cliente> qr=em.createQuery("UPDATE Cliente SET saldo=?1 WHERE id=?2",Cliente.class);
+                        
+                        qr.setParameter(1, saldo);
+                        qr.setParameter(2, id);
+                       
+                        tx.begin();
+                        qr.executeUpdate();
+                        tx.commit();
+		}
 }
