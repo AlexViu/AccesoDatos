@@ -5,6 +5,9 @@
  */
 package modelo;
 
+import com.mysql.cj.xdevapi.Result;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -81,7 +84,6 @@ public class GestionClientes {
 		}
                 
                 public void saldoCliente(int id, int saldo){
-                    
 			EntityManager em=getEntityManager();
                         EntityTransaction tx=em.getTransaction();
                         TypedQuery<Cliente> qr=em.createQuery("UPDATE Cliente SET saldo=?1 WHERE id=?2",Cliente.class);
