@@ -36,6 +36,7 @@ public class GestionClientes {
 			em.persist(c);
 			tx.commit();
 		}
+                
 		public void altaCliente(Cliente c){
 			EntityManager em=getEntityManager();
 			//la operación la incluimos en una transacción
@@ -44,7 +45,6 @@ public class GestionClientes {
 			em.persist(c);
 			tx.commit();
 		}
-		
 		
 		public List<Cliente> recuperarClientes(){
 			EntityManager em=getEntityManager();
@@ -86,13 +86,34 @@ public class GestionClientes {
                 public void saldoCliente(int id, int saldo){
 			EntityManager em=getEntityManager();
                         EntityTransaction tx=em.getTransaction();
-                        TypedQuery<Cliente> qr=em.createQuery("UPDATE Cliente SET saldo=?1 WHERE id=?2",Cliente.class);
+
+                        TypedQuery<Cliente> qr=em.createQuery("SELECT c FROM Cliente c WHERE c.id=?1",Cliente.class);
                         
-                        qr.setParameter(1, saldo);
-                        qr.setParameter(2, id);
-                       
                         tx.begin();
-                        qr.executeUpdate();
+                        qr.setParameter(1, id);
+                        
+                        addSaldo(qr.getSingleResult(), saldo, id);
                         tx.commit();
 		}
+                
+                public Cliente addSaldo(Cliente c,int saldo, int id){
+                    EntityManager em=getEntityManager();
+                        EntityTransaction tx=em.getTransaction();
+                        
+                        TypedQuery<Cliente> qr=em.createQuery("UPDATE Cliente SET saldo=?1 WHERE id=?2",Cliente.class);
+                        
+                        
+                        tx.begin();
+                        int saldoa = c.getSaldo();
+                        int saldofinal= saldoa + saldo;
+                        
+                        qr.setParameter(1, saldofinal);
+                        qr.setParameter(2, id);
+                        
+                        qr.executeUpdate();
+                        tx.commit();    
+                    
+                        return c;   
+                }
+                        
 }
