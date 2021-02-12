@@ -30,7 +30,6 @@ public class GestionCompras {
 			EntityManager em=getEntityManager();
 			EntityTransaction tx=em.getTransaction();
                         TypedQuery<Cliente> qr=em.createQuery("SELECT c FROM Cliente c WHERE c.id=?1",Cliente.class);
-                        
                        
 			tx.begin();
                         

@@ -12,6 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import mx.com.gm.sga.Cliente;
 import mx.com.gm.sga.Devolucion;
 /**
  *
@@ -26,9 +27,15 @@ public class GestionDevolucion {
 		public void nuevoDevolucion(int id_producto, int id_cliente, int importe, String fecha, int puntos){
 			Devolucion d=new Devolucion(id_producto, id_cliente, importe, fecha, puntos);
 			EntityManager em=getEntityManager();
-			//la operación la incluimos en una transacción
 			EntityTransaction tx=em.getTransaction();
+                        TypedQuery<Cliente> qr=em.createQuery("SELECT c FROM Cliente c WHERE c.id=?1",Cliente.class);
+                       
 			tx.begin();
+                        
+                        qr.setParameter(1, id_cliente);
+                        
+                        updateSaldoDev(qr.getSingleResult(), importe, id_cliente);
+                        
 			em.persist(d);
 			tx.commit();
 		}
@@ -50,4 +57,23 @@ public class GestionDevolucion {
 			return qr.getResultList();
 		}
 
+                public Cliente updateSaldoDev(Cliente c,int saldo, int id){
+                    EntityManager em=getEntityManager();
+                        EntityTransaction tx=em.getTransaction();
+                        
+                        TypedQuery<Cliente> qr=em.createQuery("UPDATE Cliente SET saldo=?1 WHERE id=?2",Cliente.class);
+                        
+                        
+                        tx.begin();
+                        int saldoa = c.getSaldo();
+                        int saldofinal= saldoa + saldo;
+                        
+                        qr.setParameter(1, saldofinal);
+                        qr.setParameter(2, id);
+                        
+                        qr.executeUpdate();
+                        tx.commit();    
+                    
+                        return c;   
+                }
 }
